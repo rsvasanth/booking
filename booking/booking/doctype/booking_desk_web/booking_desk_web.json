@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "autoname": "WEB-BOOKING-.DD.-.MM.-.YYYY.-.#####",
+ "creation": "2021-08-23 11:31:28.146138",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "booking_type",
+  "number_of_person",
+  "from_date",
+  "to_date",
+  "amount",
+  "guest_name",
+  "desk_reservation_link",
+  "paid"
+ ],
+ "fields": [
+  {
+   "fieldname": "booking_type",
+   "fieldtype": "Select",
+   "label": "Booking Type",
+   "options": "Desk Space\nConference Room"
+  },
+  {
+   "fieldname": "number_of_person",
+   "fieldtype": "Int",
+   "label": "Number Of Person"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount"
+  },
+  {
+   "fieldname": "guest_name",
+   "fieldtype": "Data",
+   "label": "Guest Name"
+  },
+  {
+   "fieldname": "desk_reservation_link",
+   "fieldtype": "Link",
+   "label": "Desk Reservation Link",
+   "options": "Booking Desk Reservation"
+  },
+  {
+   "fieldname": "paid",
+   "fieldtype": "Int",
+   "label": "Paid"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-08-24 21:04:42.861484",
+ "modified_by": "Administrator",
+ "module": "Booking",
+ "name": "Booking Desk Web",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

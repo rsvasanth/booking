@@ -1,0 +1,8 @@
+// Copyright (c) 2021, kinisi and contributors
+// For license information, please see license.txt
+
+frappe.ui.form.on('Booking Desk Web', {
+	// refresh: function(frm) {
+
+	// }
+});

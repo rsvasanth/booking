@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "autoname": "prompt",
+ "creation": "2021-08-21 16:35:17.549288",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "booking_desk_type",
+  "number_of_persons",
+  "data_3"
+ ],
+ "fields": [
+  {
+   "fieldname": "booking_desk_type",
+   "fieldtype": "Link",
+   "label": "Booking Desk Type",
+   "options": "Booking Desk Type"
+  },
+  {
+   "fieldname": "number_of_persons",
+   "fieldtype": "Int",
+   "label": "Number Of Persons"
+  },
+  {
+   "fieldname": "data_3",
+   "fieldtype": "Data"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-08-21 16:35:37.110367",
+ "modified_by": "Administrator",
+ "module": "Booking",
+ "name": "Booking Desk",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
