@@ -132,13 +132,14 @@ def get_desks_booked(desk_type, day, exclude_reservation=None):
 
 
 @frappe.whitelist()
-def create_record(bookingtype, nop, fromdate, todate):
+def create_record(bookingtype, nop, fromdate, todate, bookingid):
 
     doc = frappe.get_doc({
         "doctype": "Booking Desk Reservation",
         "guest_name": 'test',
         "from_date": fromdate,
         "to_date": todate,
+        "web_booking_id": bookingid
     })
     row = doc.append("items", {})
     row.item = 'deskpackage'
@@ -147,6 +148,18 @@ def create_record(bookingtype, nop, fromdate, todate):
     row.amount = ""
     doc.insert()
     return doc.name, row.amount
+
+
+@frappe.whitelist()
+def update_record(draft_booking, qty):
+    print(type(qty))
+    print(qty)
+
+    doc = frappe.get_doc('Booking Desk Reservation', draft_booking)
+    for d in doc.items:
+        d.qty = int(qty)
+    doc.save()
+    return doc
 
 
 def get_current_doc(data):

@@ -13,7 +13,8 @@
   "amount",
   "guest_name",
   "desk_reservation_link",
-  "paid"
+  "paid",
+  "amended_from"
  ],
  "fields": [
   {
@@ -57,11 +58,21 @@
    "fieldname": "paid",
    "fieldtype": "Int",
    "label": "Paid"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Booking Desk Web",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2021-08-24 21:04:42.861484",
+ "modified": "2021-08-31 14:47:46.380285",
  "modified_by": "Administrator",
  "module": "Booking",
  "name": "Booking Desk Web",

@@ -6,7 +6,26 @@ from frappe.integrations.utils import get_payment_gateway_controller
 import urllib
 
 
-# controller().validate_transaction_currency(currency)
+@frappe.whitelist()
+def make_payment():
+    controller = get_payment_gateway_controller("Razorpay")
+
+    payment_details = {
+        "amount": 600,
+        "title": "Payment for bill : 111",
+        "description": "payment via cart",
+        "reference_doctype": "Booking Desk Web",
+        "reference_docname": "WEB-BOOKING-30-08-2021-00001",
+        "payer_email": "NuranVerkleij@example.com",
+        "payer_phone_number": "8940515003",
+        "payer_name": "Nuran Verkleij",
+        "order_id": "111",
+        "currency": "INR",
+        "payment_gateway": "Razorpay"
+
+    }
+
+    return controller.get_payment_url(**payment_details)
 
 # payment_details = {
 #     "amount": 600,
@@ -28,36 +47,3 @@ import urllib
 #         "upfront_amount": 1000
 #     }
 # }
-
-
-@frappe.whitelist(allow_guest=True)
-def make_payment():
-    # make order - full_name, email, company, amount, workshop=None, conference=None
-    # participant = frappe.get_doc({
-    #     'doctype': 'Conference Participant',
-    #     'full_name': full_name,
-    #     'email_id': email,
-    #     'company_name': company,
-    #     'workshop': workshop,
-    #     'conference': conference,
-    #     'amount': amount
-    # }).insert()
-
-    # get razorpay url
-    controller = get_payment_gateway_controller("Razorpay")
-    payment_details = {
-        "amount": 600,
-        "title": "Payment for bill : 111",
-        "description": "payment via cart",
-        "reference_doctype": "Payment Request",
-        "reference_docname": "PR0001",
-        "payer_email": "NuranVerkleij@example.com",
-        "payer_name": "Nuran Verkleij",
-        "order_id": "111",
-        "currency": "INR",
-        "payment_gateway": "Razorpay"
-
-    }
-
-    url = controller().get_payment_url(**payment_details)
-    return url

@@ -15,6 +15,7 @@
   "section_break_7",
   "items",
   "net_total",
+  "web_booking_id",
   "amended_from"
  ],
  "fields": [
@@ -73,12 +74,18 @@
    "options": "Booking Desk Reservation",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "web_booking_id",
+   "fieldtype": "Link",
+   "label": "Web Booking Id",
+   "options": "Booking Desk Web"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-08-23 11:19:51.199656",
+ "modified": "2021-08-31 14:01:51.682343",
  "modified_by": "Administrator",
  "module": "Booking",
  "name": "Booking Desk Reservation",
