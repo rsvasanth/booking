@@ -4,4 +4,4 @@ import frappe
 
 
 def get_context(context):
-    context.member = f
+    context.member = frappe.session.user

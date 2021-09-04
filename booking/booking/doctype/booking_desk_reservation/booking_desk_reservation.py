@@ -98,7 +98,7 @@ class BookingDeskReservation(Document):
             self.net_total += d.amount
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_desk_rate(booking_desk_reservation):
     """Calculate rate for each day as it may belong to different Booking Desk Pricing Item"""
     doc = frappe.get_doc(json.loads(booking_desk_reservation))
@@ -131,8 +131,12 @@ def get_desks_booked(desk_type, day, exclude_reservation=None):
         (desk_type, day))[0][0] or 0
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def create_record(bookingtype, nop, fromdate, todate, bookingid):
+    if bookingtype == 'Desk Space':
+        newbooking = 'normal'
+    elif bookingtype == 'Conference Room':
+        newbooking ='conference room'
 
     doc = frappe.get_doc({
         "doctype": "Booking Desk Reservation",
@@ -142,7 +146,7 @@ def create_record(bookingtype, nop, fromdate, todate, bookingid):
         "web_booking_id": bookingid
     })
     row = doc.append("items", {})
-    row.item = 'deskpackage'
+    row.item = newbooking
     row.qty = int(nop)
     row.rate = ""
     row.amount = ""

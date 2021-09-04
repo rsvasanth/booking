@@ -9,7 +9,7 @@ class BookingDeskWeb(Document):
 
     def validate(self):
         print(self.name)
-
+    
     def on_payment_authorized(self, status_changed_to, task):
         if status_changed_to:
             doc = frappe.get_doc('Booking Desk Web', task)
