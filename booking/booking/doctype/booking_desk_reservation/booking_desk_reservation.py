@@ -154,7 +154,7 @@ def create_record(bookingtype, nop, fromdate, todate, bookingid):
     return doc.name, row.amount
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def update_record(draft_booking, qty):
     print(type(qty))
     print(qty)
