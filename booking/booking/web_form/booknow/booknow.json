@@ -21,7 +21,7 @@
  "is_standard": 1,
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2021-09-04 16:49:36.891968",
+ "modified": "2021-09-06 10:00:53.796643",
  "modified_by": "Administrator",
  "module": "Booking",
  "name": "booknow",
@@ -48,7 +48,20 @@
    "max_value": 0,
    "options": "Name",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "hidden": 0,
+   "label": "Phone",
+   "max_length": 0,
+   "max_value": 0,
+   "options": "Phone",
+   "read_only": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -61,7 +74,7 @@
    "max_value": 0,
    "options": "Email",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -74,7 +87,7 @@
    "max_value": 0,
    "options": "Desk Space\nConference Room",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -86,7 +99,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -109,7 +122,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -132,7 +145,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
