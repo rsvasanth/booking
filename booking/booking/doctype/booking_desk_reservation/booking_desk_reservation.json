@@ -77,15 +77,14 @@
   },
   {
    "fieldname": "web_booking_id",
-   "fieldtype": "Link",
-   "label": "Web Booking Id",
-   "options": "Booking Desk Web"
+   "fieldtype": "Data",
+   "label": "Web Booking Id"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-09-04 15:50:02.009724",
+ "modified": "2021-09-06 15:36:27.816499",
  "modified_by": "Administrator",
  "module": "Booking",
  "name": "Booking Desk Reservation",

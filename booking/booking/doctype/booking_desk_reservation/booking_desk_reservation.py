@@ -37,7 +37,6 @@ class BookingDeskReservation(Document):
 
                 desk_type = frappe.db.get_value(
                     "Booking Desk Package", d.item, 'booking_desk_type')
-                frappe.msgprint(d.item)
                 desks_booked = get_desks_booked(desk_type, day, exclude_reservation=self.name) \
                     + d.qty + self.desks_booked.get(d.item)
                 total_desks = self.get_total_desks(d.item)
@@ -90,7 +89,7 @@ class BookingDeskReservation(Document):
                     net_rate += day_rate[0][0]
                 else:
                     frappe.throw(
-                        _("Please set Booking Desk Rate on {}").format(
+                        _("Booking  Rate's are not avillable for this period {}").format(
                             frappe.format(day, dict(fieldtype="Date"))),
                         exc=BookingDeskPricingNotSetError)
             d.rate = net_rate
@@ -105,7 +104,7 @@ def get_desk_rate(booking_desk_reservation):
     doc.set_rates()
     return doc.as_dict()
 
-
+@frappe.whitelist(allow_guest=True)
 def get_desks_booked(desk_type, day, exclude_reservation=None):
 
     exclude_condition = ''
@@ -156,9 +155,6 @@ def create_record(bookingtype, nop, fromdate, todate, bookingid):
 
 @frappe.whitelist(allow_guest=True)
 def update_record(draft_booking, qty):
-    print(type(qty))
-    print(qty)
-
     doc = frappe.get_doc('Booking Desk Reservation', draft_booking)
     for d in doc.items:
         d.qty = int(qty)
@@ -171,10 +167,31 @@ def get_current_doc(data):
     doc = frappe.get_doc('Booking Desk Reservation', '{}'.format(data))
     return doc.items
 
+def get_total_desks(item):
+    avillable_count =frappe.db.sql(
+                """
+				select count(*)
+				from
+					`tabBooking Desk Package` package
+				inner join
+					`tabBooking Desk` desk on package.booking_desk_type = desk.booking_desk_type
+				where
+					package.item = %s""", item)[0][0] or 0
+    return avillable_count   
 
-@frappe.whitelist()
-def clear_draft_reservation():
-    frappe.msg.warning("clearing draft document")
+@frappe.whitelist(allow_guest=True)
+def avillable_check(item):
+    avillable_count =frappe.db.sql(
+                """
+				select count(*)
+				from
+					`tabBooking Desk Package` package
+				inner join
+					`tabBooking Desk` desk on package.booking_desk_type = desk.booking_desk_type
+				where
+					package.item = %s""", item)[0][0] or 0
+    return avillable_count   
+
 
 
 # def validate_availability(self):

@@ -4,6 +4,38 @@ function reloadCurrentStateOptions() {
     var from_date ='';
 	var draft_booking='';
 
+	function CreateBooking(){
+
+		frappe.call({
+			method: 'booking.booking.doctype.booking_desk_reservation.booking_desk_reservation.create_record',
+			args:{
+				'bookingtype':booking,
+				'nop':number_of_person,
+				'fromdate':from_date,
+				'todate':value,
+				'bookingid':''
+			},
+			 callback: (r) => {
+				// on success
+			console.log(r);
+			var draft_booking = r.message[0]
+			frappe.web_form.set_value('desk_reservation_link', r.message[0])
+		
+			$( "#bookingid" ).html( r.message[0]);
+			$( "#member" ).html( 'Name:'+'{{member}} ');
+			$( "#duration_start" ).html( 'Starting  Date_:_'+from_date);
+			$( "#duration_end" ).html('Ending  Date_:_'+value)
+			$( 'h5.total' ).text(+r.message[1])
+			frappe.web_form.set_value('amount', r.message[1])
+			},
+			error: (r) => {
+				// on error
+				console.log(r);
+			}
+		})
+
+	} //end creating booking 
+
 	function UppdateBooking(booking_value,value) {
 
 		frappe.call({
@@ -38,6 +70,8 @@ function reloadCurrentStateOptions() {
          number_of_person = value;
 		 to_date_value = frappe.web_form.get_value('to_date');
 		 if (!to_date_value) {
+
+			
 		
 		 }else{
 		
@@ -58,33 +92,21 @@ function reloadCurrentStateOptions() {
     frappe.web_form.on('to_date',(field,value) =>{
 		
 		frappe.call({
-			method: 'booking.booking.doctype.booking_desk_reservation.booking_desk_reservation.create_record',
-			args:{
-				'bookingtype':booking,
-				'nop':number_of_person,
-				'fromdate':from_date,
-				'todate':value,
-				'bookingid':''
-			},
+			
+			method: 'booking.booking.doctype.booking_desk_reservation.booking_desk_reservation.avillable_check',
+			args:{'item':booking}
+			,
 			 callback: (r) => {
 				// on success
-			console.log(r);
-			var draft_booking = r.message[0]
-			frappe.web_form.set_value('desk_reservation_link', r.message[0])
 		
-			$( "#bookingid" ).html( r.message[0]);
-			$( "#member" ).html( 'Name:'+'{{member}} ');
-			$( "#duration_start" ).html( 'Starting  Date_:_'+from_date);
-			$( "#duration_end" ).html('Ending  Date_:_'+value)
-			$( 'h5.total' ).text(+r.message[1])
-			frappe.web_form.set_value('amount', r.message[1])
+				console.log(r)
+	
+
 			},
 			error: (r) => {
-				// on error
-				console.log(r);
+		
 			}
 		})
-
 
 
 
