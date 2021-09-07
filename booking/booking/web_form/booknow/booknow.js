@@ -2,6 +2,7 @@ function reloadCurrentStateOptions() {
 	var booking ='';
     var number_of_person =0;
     var from_date ='';
+	var to_date= '';
 	var draft_booking='';
 
 	function CreateBooking(){
@@ -12,7 +13,7 @@ function reloadCurrentStateOptions() {
 				'bookingtype':booking,
 				'nop':number_of_person,
 				'fromdate':from_date,
-				'todate':value,
+				'todate':to_date,
 				'bookingid':''
 			},
 			 callback: (r) => {
@@ -68,21 +69,7 @@ function reloadCurrentStateOptions() {
     })
     frappe.web_form.on('number_of_person',(field,value) =>{
          number_of_person = value;
-		 to_date_value = frappe.web_form.get_value('to_date');
-		 if (!to_date_value) {
-
-			
-		
-		 }else{
-		
-		
-		 var booking_value = frappe.web_form.get_value('desk_reservation_link');
-		 UppdateBooking(booking_value,value);
-		
-		
-		}
-
-
+	
         
         })
     frappe.web_form.on('from_date',(field,value) =>{
@@ -90,6 +77,8 @@ function reloadCurrentStateOptions() {
         
         })
     frappe.web_form.on('to_date',(field,value) =>{
+
+		to_date = value
 		
 		frappe.call({
 			

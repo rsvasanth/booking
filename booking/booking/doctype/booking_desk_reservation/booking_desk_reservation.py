@@ -7,6 +7,7 @@ import json
 from frappe.model.document import Document
 from frappe import _
 from frappe.utils import date_diff, add_days, flt
+from frappe.utils.data import new_line_sep
 from six import reraise
 
 
@@ -133,9 +134,9 @@ def get_desks_booked(desk_type, day, exclude_reservation=None):
 @frappe.whitelist(allow_guest=True)
 def create_record(bookingtype, nop, fromdate, todate, bookingid):
     if bookingtype == 'Desk Space':
-        newbooking = 'normal'
+        newbooking = 'desk space package'
     elif bookingtype == 'Conference Room':
-        newbooking ='conference room'
+        newbooking ='conference room package'
 
     doc = frappe.get_doc({
         "doctype": "Booking Desk Reservation",
@@ -181,6 +182,8 @@ def get_total_desks(item):
 
 @frappe.whitelist(allow_guest=True)
 def avillable_check(item):
+    if item == 'Desk Space':
+        new_item='Desk Space Package'
     avillable_count =frappe.db.sql(
                 """
 				select count(*)
@@ -189,7 +192,7 @@ def avillable_check(item):
 				inner join
 					`tabBooking Desk` desk on package.booking_desk_type = desk.booking_desk_type
 				where
-					package.item = %s""", item)[0][0] or 0
+					package.item = %s""", new_item)[0][0] or 0
     return avillable_count   
 
 
