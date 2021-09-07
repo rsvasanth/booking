@@ -21,7 +21,7 @@
  "is_standard": 1,
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2021-09-07 14:27:59.410827",
+ "modified": "2021-09-07 19:36:10.324877",
  "modified_by": "Administrator",
  "module": "Booking",
  "name": "booknow",
@@ -177,7 +177,7 @@
    "label": "Number Of Person",
    "max_length": 0,
    "max_value": 0,
-   "options": "1\n2\n3\n4\n5\n6\n7\n8",
+   "options": "",
    "read_only": 0,
    "reqd": 1,
    "show_in_filter": 0
