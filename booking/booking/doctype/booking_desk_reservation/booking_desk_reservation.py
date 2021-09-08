@@ -131,6 +131,7 @@ def get_desks_booked(desk_type, day, exclude_reservation=None):
         (desk_type, day))[0][0] or 0
 
 
+
 @frappe.whitelist(allow_guest=True)
 def create_record(bookingtype, nop, fromdate, todate, bookingid):
     if bookingtype == 'Desk Space':
@@ -151,7 +152,7 @@ def create_record(bookingtype, nop, fromdate, todate, bookingid):
     row.rate = ""
     row.amount = ""
     doc.insert()
-    return doc.name, row.amount
+    return doc,doc.items
 
 
 @frappe.whitelist(allow_guest=True)
@@ -181,19 +182,25 @@ def get_total_desks(item):
     return avillable_count   
 
 @frappe.whitelist(allow_guest=True)
-def avillable_check(item):
-    if item == 'Desk Space':
-        new_item='Desk Space Package'
+def avillable_check(todate,fromdate):
+    # if item == 'Desk Space':
+    #     new_item='Desk Space Package'
+    todesk = get_total_desks('Desk Space Package')
     avillable_count =frappe.db.sql(
                 """
-				select count(*)
+				select sum(item.qty)
 				from
-					`tabBooking Desk Package` package
-				inner join
-					`tabBooking Desk` desk on package.booking_desk_type = desk.booking_desk_type
+					`tabBooking Desk Package` desk_package,
+			        `tabBooking Desk Reservation Item` item,
+			        `tabBooking Desk Reservation` reservation
 				where
-					package.item = %s""", new_item)[0][0] or 0
-    return avillable_count   
+					item.parent = reservation.name
+			        and desk_package.item = item.item
+			        and desk_package.booking_desk_type = 'Desk'
+			        and reservation.docstatus = 1
+                    and reservation.from_date < %s
+                    and reservation.to_date > %s""",(todate,fromdate))[0][0] or 0
+    return todesk - avillable_count
 
 
 
